@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kind_heart.API", "src\Kind_heart.API\Kind_heart.API.csproj", "{F3B1919F-9767-4C06-AE81-3EAC9D5194DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kind_heart.Infrastructure", "src\Kind_heart.Infrastructure\Kind_heart.Infrastructure.csproj", "{913CE6CD-739E-4081-9BA0-21D629235E1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kind_heart.Domain", "src\Kind_heart.Domain\Kind_heart.Domain.csproj", "{C3173F8B-DDA4-43AB-A5BB-A4E0BFCE6EF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kind_heart.Application", "Kind_heart.Application\Kind_heart.Application.csproj", "{79D66D6B-4A49-4134-A270-AF4172268B74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kind_heart.Application", "src\Kind_heart.Application\Kind_heart.Application.csproj", "{DF1C3571-59E6-47A2-AEB9-DDBFDD5C9A40}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F3B1919F-9767-4C06-AE81-3EAC9D5194DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3B1919F-9767-4C06-AE81-3EAC9D5194DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3B1919F-9767-4C06-AE81-3EAC9D5194DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3B1919F-9767-4C06-AE81-3EAC9D5194DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{913CE6CD-739E-4081-9BA0-21D629235E1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{913CE6CD-739E-4081-9BA0-21D629235E1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{913CE6CD-739E-4081-9BA0-21D629235E1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{913CE6CD-739E-4081-9BA0-21D629235E1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3173F8B-DDA4-43AB-A5BB-A4E0BFCE6EF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3173F8B-DDA4-43AB-A5BB-A4E0BFCE6EF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3173F8B-DDA4-43AB-A5BB-A4E0BFCE6EF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3173F8B-DDA4-43AB-A5BB-A4E0BFCE6EF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79D66D6B-4A49-4134-A270-AF4172268B74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79D66D6B-4A49-4134-A270-AF4172268B74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79D66D6B-4A49-4134-A270-AF4172268B74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79D66D6B-4A49-4134-A270-AF4172268B74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF1C3571-59E6-47A2-AEB9-DDBFDD5C9A40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF1C3571-59E6-47A2-AEB9-DDBFDD5C9A40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF1C3571-59E6-47A2-AEB9-DDBFDD5C9A40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF1C3571-59E6-47A2-AEB9-DDBFDD5C9A40}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
