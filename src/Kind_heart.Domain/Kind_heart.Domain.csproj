@@ -8,6 +8,15 @@
 
     <ItemGroup>
       <Compile Remove="Class1.cs" />
+      <Compile Remove="Pet\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Pet\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Pet\**" />
     </ItemGroup>
 
 </Project>
