@@ -1,4 +1,4 @@
-namespace Kind_heart.Domain.Pet;
+namespace Kind_heart.Domain.Models;
 
 public enum HelpStatus
 {
@@ -27,7 +27,7 @@ public class Pet
     public bool Vaccinated { get; private set; } = default!;
     
     public DateOnly Birthday { get; private set; } = default!;
-    public DateOnly DateCreate { get; private set; } = default!;
+    public DateOnly CreatedDate { get; private set; } = default!;
     
     public HelpStatus Status { get; private set; } = HelpStatus.NeedsHelp;
     public List<Requisite> Requisites { get; private set; } = [];

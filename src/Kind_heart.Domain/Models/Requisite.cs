@@ -1,4 +1,4 @@
-namespace Kind_heart.Domain.Pet;
+namespace Kind_heart.Domain.Models;
 
 public class Requisite
 {
