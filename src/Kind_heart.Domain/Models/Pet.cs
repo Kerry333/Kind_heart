@@ -31,5 +31,6 @@ public class Pet
     
     public HelpStatus Status { get; private set; } = HelpStatus.NeedsHelp;
     public List<Requisite> Requisites { get; private set; } = [];
+    public List<PetPhoto> PetPhotos { get; private set; } = [];
 
 }
