@@ -9,22 +9,19 @@ public enum HelpStatus
     FoundHome // Нашел дом
 }
 
-public class Pet
+public class Pet : Shared.Entity<PetId>
 {
     // ef core
-    private Pet()
+    private Pet(PetId id) : base(id)
     {
     }
 
-    private Pet(PetId petId, string name, string description)
+    private Pet(PetId petId, string name, string description) : base(petId)
     {
-        Id = petId;
         Name = name;
         Description = description;
     }
     
-    public PetId Id { get; private set; }
-
     public string Name { get; private set; } = default!;
     public string Specie { get; private set; } = default!;
     public string Description { get; private set; } = default!;

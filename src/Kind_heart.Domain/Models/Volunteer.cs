@@ -2,14 +2,13 @@ using CSharpFunctionalExtensions;
 
 namespace Kind_heart.Domain.Models;
 
-public class Volunteer
+public class Volunteer: Shared.Entity<VolunteerId>
 {
     // ef core
-    private Volunteer()
+    private Volunteer(VolunteerId id) : base(id)
     {
     }
-    public VolunteerId Id { get; private set; }
-
+    
     public string Name { get; private set; }
     public string Surname { get; private set; }
     
@@ -35,9 +34,8 @@ public class Volunteer
         _pets.Add(pet);
     }
     
-    private Volunteer(VolunteerId volunteerId ,string name, string surname, string description)
+    private Volunteer(VolunteerId volunteerId ,string name, string surname, string description) : base(volunteerId)
     {
-        Id = volunteerId;
         Name = name;
         Surname = surname;
         Description = description;
