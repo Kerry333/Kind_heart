@@ -1,3 +1,5 @@
+using CSharpFunctionalExtensions;
+
 namespace Kind_heart.Domain.Models;
 
 public enum HelpStatus
@@ -9,8 +11,20 @@ public enum HelpStatus
 
 public class Pet
 {
-    public Guid Id { get; private set; }
+    // ef core
+    private Pet()
+    {
+    }
+
+    private Pet(PetId petId, string name, string description)
+    {
+        Id = petId;
+        Name = name;
+        Description = description;
+    }
     
+    public PetId Id { get; private set; }
+
     public string Name { get; private set; } = default!;
     public string Specie { get; private set; } = default!;
     public string Description { get; private set; } = default!;
@@ -30,7 +44,35 @@ public class Pet
     public DateOnly CreatedDate { get; private set; } = default!;
     
     public HelpStatus Status { get; private set; } = HelpStatus.NeedsHelp;
-    public List<Requisite> Requisites { get; private set; } = [];
-    public List<PetPhoto> PetPhotos { get; private set; } = [];
+
+    public RequisiteDetails RequisiteDetails { get; private set; } = default!;
+
+    public PetPhotoDetails PetPhotoDetails { get; private set; } = default!;
+    
+    // Не плохой вариант:
+   /* public static (Pet? Pet, string? Error) Create(string name, string description)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+            return (null, "Name can not be empty");
+        if (string.IsNullOrWhiteSpace(description))
+            return (null, "Description can not be empty");
+        var pet = new Pet(name, description);
+        return (pet, null);
+    }
+    */
+   
+    // Но есть хорошая альтернатива (установить пакет CsharpFunctionalExtensions):
+    public static Result<Pet> Create(PetId id, string name, string description)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+            return Result.Failure<Pet>("Name can not be empty");
+        
+        if (string.IsNullOrWhiteSpace(description))
+            return Result.Failure<Pet>("Description can not be empty");
+        
+        var pet = new Pet(id, name, description);
+        
+        return Result.Success(pet);
+    }
 
 }

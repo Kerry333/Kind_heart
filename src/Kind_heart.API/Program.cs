@@ -1,4 +1,5 @@
 using Kind_heart.API;
+using Kind_heart.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,8 @@ var summaries = new[]
 {
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
+
+builder.Services.AddScoped<ApplicationDbContext>();
 
 app.MapGet("/weatherforecast", () =>
 {
