@@ -8,15 +8,12 @@ public sealed class Volunteer: Shared.Entity<VolunteerId>
     // ef core
     private Volunteer(VolunteerId id) : base(id)
     {
-        Name = default!;  
-        Surname = default!;
+        FullName = default!;  
         Description = default!;
     }
 
     
-    public Name Name { get; private set; }
-    public Surname Surname { get; private set; }
-    
+    public FullName FullName { get; private set; }
     public Description Description { get; private set; }
     public Experience Experience { get; private set; } = default!;
     public Phone Phone { get; private set; } = default!;
@@ -39,27 +36,28 @@ public sealed class Volunteer: Shared.Entity<VolunteerId>
     }
     
     private Volunteer(VolunteerId volunteerId ,
-                        Name name, 
-                        Surname surname, 
+                        FullName fullName, 
                         Description description,
                         Experience experience,
                         Phone phone) : base(volunteerId)
     {
-        Name = name;
-        Surname = surname;
+        FullName = fullName;
         Description = description;
         Experience = experience;
         Phone = phone;
     }
     public static Result<Volunteer> Create(VolunteerId volunteerId,
-                                            Name name, 
-                                            Surname surname, 
+                                            FullName fullName, 
                                             Description description,
                                             Experience experience,
                                             Phone phone)
     {
         
-        return new Volunteer(volunteerId ,name, surname, description, experience, phone);
+        return new Volunteer(volunteerId ,
+                                fullName, 
+                                description, 
+                                experience, 
+                                phone);
     }
 
 }

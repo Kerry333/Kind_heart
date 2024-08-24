@@ -1,4 +1,5 @@
 using CSharpFunctionalExtensions;
+using Kind_heart.Domain.Shared;
 using Kind_heart.Domain.ValueObjects;
 
 namespace Kind_heart.Domain.Models;
@@ -17,12 +18,21 @@ public class Pet : Shared.Entity<PetId>
     {
     }
 
-    private Pet(PetId petId, Name name, Description description,
-                string specie,  string breed,
-                Color color, Health health, Address address,
-                Phone phone, float weight, float height,
-                bool castrated, bool vaccinated, 
-                DateOnly birthday, DateOnly createdDate,
+    private Pet(PetId petId, 
+                Name name, 
+                Description description,
+                string specie,  
+                string breed,
+                Color color, 
+                Health health, 
+                Address address,
+                Phone phone, 
+                float weight, 
+                float height,
+                bool castrated, 
+                bool vaccinated, 
+                DateOnly birthday, 
+                DateOnly createdDate,
                 HelpStatus status) : base(petId)
     {
         Name = name;
@@ -78,19 +88,65 @@ public class Pet : Shared.Entity<PetId>
     */
    
     // Но есть хорошая альтернатива (установить пакет CsharpFunctionalExtensions):
-    public static Result<Pet> Create(PetId id, Name name, Description description,
-                                    string specie,  string breed,
-                                    Color color, Health health, Address address,
-                                    Phone phone, float weight, float height,
-                                    bool castrated, bool vaccinated,
-                                    DateOnly birthday, DateOnly createdDate,
+    public static Result<Pet> Create(PetId id, 
+                                    Name name, 
+                                    Description description,
+                                    string specie,  
+                                    string breed,
+                                    Color color, 
+                                    Health health, 
+                                    Address address,
+                                    Phone phone, 
+                                    float weight, 
+                                    float height,
+                                    bool castrated, 
+                                    bool vaccinated,
+                                    DateOnly birthday, 
+                                    DateOnly createdDate,
                                     HelpStatus helpStatus)
+    
     {
-        var pet = new Pet(id, name, description,
-                            specie, breed, color, health, 
-                            address, phone, weight, height,
-                            castrated, vaccinated,
-                            birthday, createdDate, helpStatus);
+        if(string.IsNullOrWhiteSpace(specie) || specie.Length > Constants.MAX_LOW_TEXT_LENGTH)
+            return Result.Failure<Pet>("Specie is invalid");
+        
+        if(string.IsNullOrWhiteSpace(breed) || breed.Length > Constants.MAX_LOW_TEXT_LENGTH)
+            return Result.Failure<Pet>("Breed is invalid");
+        
+        if(weight <= 0)
+            return Result.Failure<Pet>("Weight can not be less than zero");
+        
+        if(height <= 0)
+            return Result.Failure<Pet>("Height can not be less than zero");
+        
+        if (birthday > DateOnly.FromDateTime(DateTime.Now))
+            return Result.Failure<Pet>("Birthday cannot be in the future.");
+        
+        if (createdDate < birthday)
+            return Result.Failure<Pet>("Created date cannot be earlier than the birthday.");
+    
+        if (createdDate > DateOnly.FromDateTime(DateTime.Now))
+            return Result.Failure<Pet>("Created date cannot be in the future.");
+        
+        if (!Enum.IsDefined(typeof(HelpStatus), helpStatus))
+            return Result.Failure<Pet>("Invalid help status.");
+        
+        
+        var pet = new Pet(id,
+                        name, 
+                        description,
+                        specie, 
+                        breed, 
+                        color, 
+                        health, 
+                        address, 
+                        phone, 
+                        weight, 
+                        height,
+                        castrated, 
+                        vaccinated,
+                        birthday, 
+                        createdDate, 
+                        helpStatus);
         
         return Result.Success(pet);
     }

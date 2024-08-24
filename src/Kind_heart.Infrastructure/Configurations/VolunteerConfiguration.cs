@@ -17,20 +17,19 @@ public class VolunteerConfiguration: IEntityTypeConfiguration<Volunteer>
                 id => id.Value,
                 value => VolunteerId.Create(value));
         
-        builder.ComplexProperty(v => v.Name, nb =>
+        builder.ComplexProperty(v => v.FullName, fb =>
         {
-            nb.Property(n => n.Value)
+            fb.Property(f => f.FirstName)
                 .IsRequired()
                 .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH)
-                .HasColumnName("name");
-        });
-        
-        builder.ComplexProperty(v => v.Surname, sb =>
-        {
-            sb.Property(n => n.Value)
+                .HasColumnName("first_name");
+            fb.Property(f => f.MiddleName)
+                .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH)
+                .HasColumnName("middle_name");
+            fb.Property(f => f.LastName)
                 .IsRequired()
                 .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH)
-                .HasColumnName("surname");
+                .HasColumnName("last_name");
         });
         
         builder.ComplexProperty(v => v.Description, db =>
@@ -62,7 +61,7 @@ public class VolunteerConfiguration: IEntityTypeConfiguration<Volunteer>
 
         builder.OwnsOne(v => v.RequisiteDetails, vb =>
         {
-            vb.ToJson();
+            vb.ToJson("requisite_details");
             vb.OwnsMany(r => r.Requisites, rb =>
             {
                 rb.Property(r => r.Name)
@@ -76,7 +75,7 @@ public class VolunteerConfiguration: IEntityTypeConfiguration<Volunteer>
 
         builder.OwnsOne(v => v.SocialNetworkDetails, vb =>
         {
-            vb.ToJson();
+            vb.ToJson("social_network_details");
             vb.OwnsMany(sn => sn.SocialNetworks, snb =>
             {
                 snb.Property(s => s.Name)

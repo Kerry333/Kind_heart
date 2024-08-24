@@ -5,30 +5,26 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Kind_heart.API.Controllers;
-
-public class WeatherForecastController: ControllerBase
+public class VolunteerController: ControllerBase
 {
     [HttpGet]
 
-    public IActionResult Get(Name name, Surname surname, Description description, Experience experience, Phone phone)
+    public IActionResult Get(FullName fullName, Description description, Experience experience, Phone phone)
     {
-        /* с использованием кортежа
-        var (pet, error) = Pet.Create(name, description);   
-        if (error is not null)
-        {
-            return ValidationProblem();
-        }
-        */
         
-        var volunteerResult = Volunteer.Create(VolunteerId.NewVolunteerId(), name, surname,
-                                                description, experience, phone );
+        var volunteerResult = Volunteer.Create(VolunteerId.NewVolunteerId(), 
+                                                fullName,
+                                                description, 
+                                                experience, 
+                                                phone );
+        
         if (volunteerResult.IsFailure)
             return BadRequest(volunteerResult.Error);
 
-        var result = Save(volunteerResult.Value);
+       // var result = Save(volunteerResult.Value);
 
-        if (result.IsFailure)
-            return BadRequest(result.Error);
+        //if (result.IsFailure)
+         //   return BadRequest(result.Error);
         
         // если Save с типом void
         //Save(volunteerResult.Value); 
@@ -36,7 +32,7 @@ public class WeatherForecastController: ControllerBase
         // операция сохранения в БД
         return Ok();
     }
-
+/*
     public Result Save(Volunteer volunteer)
     {
         if (true)
@@ -45,4 +41,5 @@ public class WeatherForecastController: ControllerBase
         }
         return Result.Failure("ошибка");
     }
+    */
 }

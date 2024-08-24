@@ -113,7 +113,7 @@ public class PetConfiguration: IEntityTypeConfiguration<Pet>
         
         builder.OwnsOne(p => p.RequisiteDetails, pb =>
         {
-            pb.ToJson();
+            pb.ToJson("requisite_details");
             pb.OwnsMany(r => r.Requisites, rb =>
             {
                 rb.Property(r => r.Name)
@@ -127,7 +127,7 @@ public class PetConfiguration: IEntityTypeConfiguration<Pet>
         
         builder.OwnsOne(p => p.PetPhotoDetails, pb =>
         {
-            pb.ToJson();
+            pb.ToJson("pet_photo_details");
             pb.OwnsMany(pph => pph.PetPhotos, pphb =>
             {
                 pphb.Property(r => r.Path)
