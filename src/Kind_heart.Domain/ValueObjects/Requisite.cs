@@ -1,11 +1,11 @@
 using CSharpFunctionalExtensions;
 
-namespace Kind_heart.Domain.Models;
+namespace Kind_heart.Domain.ValueObjects;
 
 public record Requisite
 {
-    public string Name { get; private set; }
-    public string Description { get; private set; }
+    public string Name { get; }
+    public string Description { get;  }
 
     private Requisite(string name, string description)
     {

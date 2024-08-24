@@ -1,11 +1,11 @@
 using CSharpFunctionalExtensions;
 
-namespace Kind_heart.Domain.Models;
+namespace Kind_heart.Domain.ValueObjects;
 
 public record SocialNetwork
 {
-    public string Name { get; private set; }
-    public string Path { get; private set; } 
+    public string Name { get; }
+    public string Path { get; } 
 
     private SocialNetwork(string name, string path)
     {

@@ -16,36 +16,47 @@ public class VolunteerConfiguration: IEntityTypeConfiguration<Volunteer>
             .HasConversion(
                 id => id.Value,
                 value => VolunteerId.Create(value));
-
-        builder.Property(v => v.Name)
-            .IsRequired()
-            .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
         
-        builder.Property(v => v.Surname)
-            .IsRequired()
-            .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
+        builder.ComplexProperty(v => v.Name, nb =>
+        {
+            nb.Property(n => n.Value)
+                .IsRequired()
+                .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH)
+                .HasColumnName("name");
+        });
         
-        builder.Property(v => v.Description)
-            .IsRequired()
-            .HasMaxLength(Constants.MAX_HIGH_TEXT_LENGTH);
+        builder.ComplexProperty(v => v.Surname, sb =>
+        {
+            sb.Property(n => n.Value)
+                .IsRequired()
+                .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH)
+                .HasColumnName("surname");
+        });
+        
+        builder.ComplexProperty(v => v.Description, db =>
+        {
+            db.Property(n => n.Value)
+                .IsRequired()
+                .HasMaxLength(Constants.MAX_HIGH_TEXT_LENGTH)
+                .HasColumnName("description");
+        });
 
-        builder.Property(v => v.Experience)
-            .IsRequired();
-
-        builder.Property(v => v.AdoptedAnimalsCount)
-            .IsRequired();
-
-        builder.Property(v => v.AnimalsNeedingHomeCount)
-            .IsRequired();
-
-        builder.Property(v => v.AnimalsInCareCount)
-            .IsRequired();
-
-        builder.Property(v => v.Phone)
-            .IsRequired()
-            .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
-
-        builder.HasMany(v => v.Pet)
+        builder.ComplexProperty(v => v.Experience, exb =>
+        {
+            exb.Property(n => n.Value)
+                .IsRequired()
+                .HasColumnName("experience");
+        });
+        
+        builder.ComplexProperty(v => v.Phone, pb =>
+        {
+            pb.Property(n => n.Value)
+                .IsRequired()
+                .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH)
+                .HasColumnName("phone");
+        });
+        
+        builder.HasMany(v => v.Pets)
             .WithOne()
             .HasForeignKey("volunteer_id");
 

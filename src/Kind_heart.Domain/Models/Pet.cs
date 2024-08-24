@@ -1,4 +1,5 @@
 using CSharpFunctionalExtensions;
+using Kind_heart.Domain.ValueObjects;
 
 namespace Kind_heart.Domain.Models;
 
@@ -16,31 +17,49 @@ public class Pet : Shared.Entity<PetId>
     {
     }
 
-    private Pet(PetId petId, string name, string description) : base(petId)
+    private Pet(PetId petId, Name name, Description description,
+                string specie,  string breed,
+                Color color, Health health, Address address,
+                Phone phone, float weight, float height,
+                bool castrated, bool vaccinated, 
+                DateOnly birthday, DateOnly createdDate,
+                HelpStatus status) : base(petId)
     {
         Name = name;
         Description = description;
+        Specie = specie;
+        Breed = breed;
+        Color = color;
+        Health = health;
+        Address = address;
+        Phone = phone;
+        Weight = weight;
+        Height = height;
+        Castrated = castrated;
+        Vaccinated = vaccinated;
+        Birthday = birthday;
+        CreatedDate = createdDate;
+        Status = status;
     }
     
-    public string Name { get; private set; } = default!;
+    public Name Name { get; private set; } = default!;
+    public Description Description { get; private set; } = default!;
     public string Specie { get; private set; } = default!;
-    public string Description { get; private set; } = default!;
     public string Breed { get; private set; } = default!;
-    public string Color { get; private set; } = default!;
-    public string Health { get; private set; } = default!;
-    public string Address { get; private set; } = default!;
-    public string Phone { get; private set; } = default!;
+    public Color Color { get; private set; } = default!;
+    public Health Health { get; private set; } = default!;
+    public Address Address { get; private set; } = default!;
+    public Phone Phone { get; private set; } = default!;
     
     public float Weight { get; private set; } = default!;
     public float Height { get; private set; } = default!;
     
-    public bool Castrated { get; private set; } = default!;
-    public bool Vaccinated { get; private set; } = default!;
+    public bool Castrated { get; private set; } 
+    public bool Vaccinated { get; private set; } 
     
-    public DateOnly Birthday { get; private set; } = default!;
+    public DateOnly Birthday { get; private set; } 
     public DateOnly CreatedDate { get; private set; } = default!;
-    
-    public HelpStatus Status { get; private set; } = HelpStatus.NeedsHelp;
+    public HelpStatus Status { get; private set; } = default!;
 
     public RequisiteDetails RequisiteDetails { get; private set; } = default!;
 
@@ -59,17 +78,28 @@ public class Pet : Shared.Entity<PetId>
     */
    
     // Но есть хорошая альтернатива (установить пакет CsharpFunctionalExtensions):
-    public static Result<Pet> Create(PetId id, string name, string description)
+    public static Result<Pet> Create(PetId id, Name name, Description description,
+                                    string specie,  string breed,
+                                    Color color, Health health, Address address,
+                                    Phone phone, float weight, float height,
+                                    bool castrated, bool vaccinated,
+                                    DateOnly birthday, DateOnly createdDate,
+                                    HelpStatus helpStatus)
     {
-        if (string.IsNullOrWhiteSpace(name))
-            return Result.Failure<Pet>("Name can not be empty");
-        
-        if (string.IsNullOrWhiteSpace(description))
-            return Result.Failure<Pet>("Description can not be empty");
-        
-        var pet = new Pet(id, name, description);
+        var pet = new Pet(id, name, description,
+                            specie, breed, color, health, 
+                            address, phone, weight, height,
+                            castrated, vaccinated,
+                            birthday, createdDate, helpStatus);
         
         return Result.Success(pet);
     }
 
 }
+
+
+    
+
+
+    
+    

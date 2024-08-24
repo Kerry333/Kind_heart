@@ -1,6 +1,6 @@
 using CSharpFunctionalExtensions;
 
-namespace Kind_heart.Domain.Models;
+namespace Kind_heart.Domain.ValueObjects;
 
 public record PetPhoto
 {
@@ -10,7 +10,7 @@ public record PetPhoto
     }
     public string Path { get;  }
     
-    public bool IsMainPhoto { get; private set; } = default!;
+    public bool IsMainPhoto { get;  } = default!;
 
     public static Result<PetPhoto> Create(string path)
     {

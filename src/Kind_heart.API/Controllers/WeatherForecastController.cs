@@ -1,5 +1,6 @@
 using CSharpFunctionalExtensions;
 using Kind_heart.Domain.Models;
+using Kind_heart.Domain.ValueObjects;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,7 +10,7 @@ public class WeatherForecastController: ControllerBase
 {
     [HttpGet]
 
-    public IActionResult Get(string name, string surname, string description)
+    public IActionResult Get(Name name, Surname surname, Description description, Experience experience, Phone phone)
     {
         /* с использованием кортежа
         var (pet, error) = Pet.Create(name, description);   
@@ -19,7 +20,8 @@ public class WeatherForecastController: ControllerBase
         }
         */
         
-        var volunteerResult = Volunteer.Create(VolunteerId.NewVolunteerId(), name, surname,  description);
+        var volunteerResult = Volunteer.Create(VolunteerId.NewVolunteerId(), name, surname,
+                                                description, experience, phone );
         if (volunteerResult.IsFailure)
             return BadRequest(volunteerResult.Error);
 

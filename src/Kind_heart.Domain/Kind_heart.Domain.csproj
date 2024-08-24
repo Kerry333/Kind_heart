@@ -9,6 +9,7 @@
     <ItemGroup>
       <Compile Remove="Class1.cs" />
       <Compile Remove="Pet\**" />
+      <Compile Remove="ValueObjects\NotEmptyStringLong.cs" />
     </ItemGroup>
 
     <ItemGroup>

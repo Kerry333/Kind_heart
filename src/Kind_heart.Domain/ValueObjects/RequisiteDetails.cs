@@ -1,4 +1,4 @@
-namespace Kind_heart.Domain.Models;
+namespace Kind_heart.Domain.ValueObjects;
 
 public record RequisiteDetails
 {
