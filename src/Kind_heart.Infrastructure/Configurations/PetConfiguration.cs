@@ -1,4 +1,6 @@
 using Kind_heart.Domain.Models;
+using Kind_heart.Domain.Models.Species;
+using Kind_heart.Domain.Models.Volunteer;
 using Kind_heart.Domain.Shared;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -24,10 +26,21 @@ public class PetConfiguration: IEntityTypeConfiguration<Pet>
                 .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH)
                 .HasColumnName("name");
         });
-        
-        builder.Property(p => p.Specie)
-            .IsRequired()
-            .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
+
+        builder.ComplexProperty(p => p.PetType, ptb =>
+        {
+            ptb.Property(pt => pt.SpeciesId)
+                .HasConversion(
+                    id => id.Value,
+                    value => SpeciesId.Create(value))
+                .IsRequired()
+                .HasColumnName("species_id");
+
+            ptb.Property(pt => pt.BreedId)
+                .IsRequired()
+                .HasColumnName("breed_id");
+        });
+            
         
         builder.ComplexProperty(p => p.Description, db =>
         {
@@ -36,10 +49,6 @@ public class PetConfiguration: IEntityTypeConfiguration<Pet>
                 .HasMaxLength(Constants.MAX_HIGH_TEXT_LENGTH)
                 .HasColumnName("description");
         });
-        
-        builder.Property(p => p.Breed)
-            .IsRequired()
-            .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
         
         builder.ComplexProperty(p => p.Color, cb =>
         {

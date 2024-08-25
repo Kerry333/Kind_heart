@@ -1,5 +1,6 @@
 using CSharpFunctionalExtensions;
 using Kind_heart.Domain.Models;
+using Kind_heart.Domain.Models.Volunteer;
 using Kind_heart.Domain.ValueObjects;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

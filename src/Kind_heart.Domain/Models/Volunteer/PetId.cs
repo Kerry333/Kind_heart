@@ -1,4 +1,4 @@
-namespace Kind_heart.Domain.Models;
+namespace Kind_heart.Domain.Models.Volunteer;
 
 public record PetId
 {
