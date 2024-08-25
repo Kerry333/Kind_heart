@@ -6,11 +6,11 @@ namespace Kind_heart.Domain.ValueObjects;
 public record FullName
 {
     public Name FirstName { get; }  // так как record Name я создавала и для Pet, то почему бы его здесь не использовать
-    public string MiddleName { get; }
+    public string? MiddleName { get; }
     public Name LastName { get; } 
 
     private  FullName(Name firstName,
-                        string middleName,
+                        string? middleName,
                         Name lastName)
     {
         FirstName = firstName;
@@ -19,10 +19,10 @@ public record FullName
     }
 
     public static Result<FullName> Create(Name firstName,
-                                            string middleName,
+                                            string? middleName,
                                             Name lastName)
     {
-        if(middleName.Length > Constants.MAX_LOW_TEXT_LENGTH)
+        if(!string.IsNullOrEmpty(middleName) && middleName.Length > Constants.MAX_LOW_TEXT_LENGTH)
             return Result.Failure<FullName>("Middlename is invalid");
 
         return new FullName(firstName, middleName, lastName);
