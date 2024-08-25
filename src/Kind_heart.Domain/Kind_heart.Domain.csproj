@@ -9,6 +9,7 @@
     <ItemGroup>
       <Compile Remove="Class1.cs" />
       <Compile Remove="Pet\**" />
+      <Compile Remove="ValueObjects\NotEmptyStringLong.cs" />
     </ItemGroup>
 
     <ItemGroup>
@@ -17,6 +18,10 @@
 
     <ItemGroup>
       <None Remove="Pet\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="CSharpFunctionalExtensions" Version="2.42.5" />
     </ItemGroup>
 
 </Project>

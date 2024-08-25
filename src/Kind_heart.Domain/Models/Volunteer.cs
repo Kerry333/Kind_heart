@@ -1,23 +1,64 @@
+using CSharpFunctionalExtensions;
+using Kind_heart.Domain.ValueObjects;
+
 namespace Kind_heart.Domain.Models;
 
-public class Volunteer
+public sealed class Volunteer: Shared.Entity<VolunteerId>
 {
-    public Guid Id { get; private set; }
+    // ef core
+    private Volunteer(VolunteerId id) : base(id)
+    {
+        FullName = default!;  
+        Description = default!;
+    }
 
-    public string Name { get; private set; } = default!;
-    public string Surname { get; private set; } = default!;
     
-    public string Description { get; private set; } = default!;
-    public float Experience { get; private set; } = default!;
+    public FullName FullName { get; private set; }
+    public Description Description { get; private set; }
+    public Experience Experience { get; private set; } = default!;
+    public Phone Phone { get; private set; } = default!;
+
+    public int AdoptedPetsCount() => Pets.Count(p => p.Status == HelpStatus.FoundHome);
+    public int PetsNeedingHomeCount() => Pets.Count(p => p.Status == HelpStatus.LookingForHome);
+    public int PetsInCareCount() => Pets.Count(p => p.Status == HelpStatus.NeedsHelp); 
     
-    public int AdoptedAnimalsCount { get; private set; } = default!;
-    public int AnimalsNeedingHomeCount { get; private set; } = default!;
-    public int AnimalsInCareCount { get; private set; } = default!;
+    public SocialNetworkDetails SocialNetworkDetails { get; private set; } = default!;
 
-    public string Phone { get; private set; } = default!;
+    public RequisiteDetails RequisiteDetails { get; private set; } = default!;
+    
+    private readonly List<Pet> _pets = [];
+    public IReadOnlyList<Pet> Pets => _pets;
 
-    public List<SotialNetwork> SotialNetworks { get; private set; } = [];
-    public List<Requisite> Requisites { get; private set; } = [];
-    public List<Pet> Pets { get; private set; } = [];
+    public void AddPet(Pet pet)
+    {
+        // TODO: валидацию
+        _pets.Add(pet);
+    }
+    
+    private Volunteer(VolunteerId volunteerId ,
+                        FullName fullName, 
+                        Description description,
+                        Experience experience,
+                        Phone phone) : base(volunteerId)
+    {
+        FullName = fullName;
+        Description = description;
+        Experience = experience;
+        Phone = phone;
+    }
+    public static Result<Volunteer> Create(VolunteerId volunteerId,
+                                            FullName fullName, 
+                                            Description description,
+                                            Experience experience,
+                                            Phone phone)
+    {
+        
+        return new Volunteer(volunteerId ,
+                                fullName, 
+                                description, 
+                                experience, 
+                                phone);
+    }
 
 }
+
