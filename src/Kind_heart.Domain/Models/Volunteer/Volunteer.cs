@@ -1,7 +1,7 @@
 using CSharpFunctionalExtensions;
 using Kind_heart.Domain.ValueObjects;
 
-namespace Kind_heart.Domain.Models;
+namespace Kind_heart.Domain.Models.Volunteer;
 
 public sealed class Volunteer: Shared.Entity<VolunteerId>
 {

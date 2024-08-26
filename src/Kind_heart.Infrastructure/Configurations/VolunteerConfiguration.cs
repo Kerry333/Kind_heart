@@ -1,4 +1,5 @@
 using Kind_heart.Domain.Models;
+using Kind_heart.Domain.Models.Volunteer;
 using Kind_heart.Domain.Shared;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

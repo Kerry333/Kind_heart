@@ -1,4 +1,6 @@
 using Kind_heart.Domain.Models;
+using Kind_heart.Domain.Models.Species;
+using Kind_heart.Domain.Models.Volunteer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -10,6 +12,7 @@ public class ApplicationDbContext(IConfiguration configuration) : DbContext
     private const string DATABASE = "Database";
 
     public DbSet<Volunteer> Volunteers => Set<Volunteer>();
+    public DbSet<Species> Species => Set<Species>();
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

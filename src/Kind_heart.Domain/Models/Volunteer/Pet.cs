@@ -2,7 +2,7 @@ using CSharpFunctionalExtensions;
 using Kind_heart.Domain.Shared;
 using Kind_heart.Domain.ValueObjects;
 
-namespace Kind_heart.Domain.Models;
+namespace Kind_heart.Domain.Models.Volunteer;
 
 public enum HelpStatus
 {
@@ -21,8 +21,7 @@ public class Pet : Shared.Entity<PetId>
     private Pet(PetId petId, 
                 Name name, 
                 Description description,
-                string specie,  
-                string breed,
+                PetType petType,
                 Color color, 
                 Health health, 
                 Address address,
@@ -37,8 +36,7 @@ public class Pet : Shared.Entity<PetId>
     {
         Name = name;
         Description = description;
-        Specie = specie;
-        Breed = breed;
+        PetType = petType;
         Color = color;
         Health = health;
         Address = address;
@@ -54,8 +52,8 @@ public class Pet : Shared.Entity<PetId>
     
     public Name Name { get; private set; } = default!;
     public Description Description { get; private set; } = default!;
-    public string Specie { get; private set; } = default!;
-    public string Breed { get; private set; } = default!;
+    
+    public PetType PetType { get; private set; } = default!;
     public Color Color { get; private set; } = default!;
     public Health Health { get; private set; } = default!;
     public Address Address { get; private set; } = default!;
@@ -91,8 +89,7 @@ public class Pet : Shared.Entity<PetId>
     public static Result<Pet> Create(PetId id, 
                                     Name name, 
                                     Description description,
-                                    string specie,  
-                                    string breed,
+                                    PetType petType,
                                     Color color, 
                                     Health health, 
                                     Address address,
@@ -106,12 +103,6 @@ public class Pet : Shared.Entity<PetId>
                                     HelpStatus helpStatus)
     
     {
-        if(string.IsNullOrWhiteSpace(specie) || specie.Length > Constants.MAX_LOW_TEXT_LENGTH)
-            return Result.Failure<Pet>("Specie is invalid");
-        
-        if(string.IsNullOrWhiteSpace(breed) || breed.Length > Constants.MAX_LOW_TEXT_LENGTH)
-            return Result.Failure<Pet>("Breed is invalid");
-        
         if(weight <= 0)
             return Result.Failure<Pet>("Weight can not be less than zero");
         
@@ -134,8 +125,7 @@ public class Pet : Shared.Entity<PetId>
         var pet = new Pet(id,
                         name, 
                         description,
-                        specie, 
-                        breed, 
+                        petType, 
                         color, 
                         health, 
                         address, 
@@ -152,10 +142,3 @@ public class Pet : Shared.Entity<PetId>
     }
 
 }
-
-
-    
-
-
-    
-    
