@@ -1,8 +1,12 @@
+using System.Runtime.InteropServices.JavaScript;
 using CSharpFunctionalExtensions;
+using Kind_heart.Domain.Shared;
 
 namespace Kind_heart.Domain.ValueObjects;
 
-public record Experience
+public record 
+    
+    Experience
 {
     public int Value { get; }
 
@@ -11,10 +15,10 @@ public record Experience
         Value = value;
     }
 
-    public static Result<Experience> Create(int value)
+    public static Result<Experience, Error> Create(int value)
     {
         if(value < 0)
-            return Result.Failure<Experience>("Experience can not be less then 0");
+            return Errors.General.ValueIsInvalide("Experience");
 
         return new Experience(value);
     }

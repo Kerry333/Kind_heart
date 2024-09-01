@@ -12,10 +12,10 @@ public record Health
         Value = value;
     }
 
-    public static Result<Health> Create(string value)
+    public static Result<Health, Error> Create(string value)
     {
         if(string.IsNullOrWhiteSpace(value) || value.Length > Constants.MAX_LOW_TEXT_LENGTH)
-            return Result.Failure<Health>("Health can not be null and within the allowed range");
+            return Errors.General.ValueIsInvalide("Health");
 
         return new Health(value);
     }

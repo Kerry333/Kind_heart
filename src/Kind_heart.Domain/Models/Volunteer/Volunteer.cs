@@ -1,4 +1,3 @@
-using CSharpFunctionalExtensions;
 using Kind_heart.Domain.ValueObjects;
 
 namespace Kind_heart.Domain.Models.Volunteer;
@@ -35,17 +34,22 @@ public sealed class Volunteer: Shared.Entity<VolunteerId>
         _pets.Add(pet);
     }
     
-    private Volunteer(VolunteerId volunteerId ,
+    public Volunteer(VolunteerId volunteerId ,
                         FullName fullName, 
                         Description description,
                         Experience experience,
-                        Phone phone) : base(volunteerId)
+                        Phone phone,
+                        RequisiteDetails requisiteDetails,
+                        SocialNetworkDetails socialNetworkDetails) : base(volunteerId)
     {
         FullName = fullName;
         Description = description;
         Experience = experience;
         Phone = phone;
+        RequisiteDetails = requisiteDetails;
+        SocialNetworkDetails = socialNetworkDetails;
     }
+    /*
     public static Result<Volunteer> Create(VolunteerId volunteerId,
                                             FullName fullName, 
                                             Description description,
@@ -59,6 +63,7 @@ public sealed class Volunteer: Shared.Entity<VolunteerId>
                                 experience, 
                                 phone);
     }
+    */
 
 }
 

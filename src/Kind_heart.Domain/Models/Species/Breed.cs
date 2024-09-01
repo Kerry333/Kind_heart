@@ -1,4 +1,5 @@
 using CSharpFunctionalExtensions;
+using Kind_heart.Domain.Shared;
 using Kind_heart.Domain.ValueObjects;
 
 namespace Kind_heart.Domain.Models.Species;

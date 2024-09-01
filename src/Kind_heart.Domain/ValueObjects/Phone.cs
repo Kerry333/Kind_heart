@@ -12,10 +12,10 @@ public record Phone
         Value = value;
     }
 
-    public static Result<Phone> Create(string value)
+    public static Result<Phone, Error> Create(string value)
     {
         if(string.IsNullOrWhiteSpace(value) || value.Length > Constants.MAX_LOW_TEXT_LENGTH)
-            return Result.Failure<Phone>("Name can not be null and within the allowed range");
+            return Errors.General.ValueIsInvalide("Phone");
 
         return new Phone(value);
     }

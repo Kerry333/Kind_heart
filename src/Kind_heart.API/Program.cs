@@ -1,12 +1,21 @@
 using Kind_heart.API;
+using Kind_heart.Application.Volunteers.CreateVolunteer;
 using Kind_heart.Infrastructure;
+using Kind_heart.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddControllers();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<ApplicationDbContext>();
+
+builder.Services.AddScoped<CreateVolunteerHandler>();
+builder.Services.AddScoped<IVolunteersRepository, VolunteersRepository>();
 
 var app = builder.Build();
 
@@ -18,7 +27,5 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-builder.Services.AddScoped<ApplicationDbContext>();
-
+app.MapControllers();
 app.Run();

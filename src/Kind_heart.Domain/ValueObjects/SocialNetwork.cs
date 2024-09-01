@@ -1,4 +1,5 @@
 using CSharpFunctionalExtensions;
+using Kind_heart.Domain.Shared;
 
 namespace Kind_heart.Domain.ValueObjects;
 
@@ -13,15 +14,15 @@ public record SocialNetwork
         Path = path;
     }
 
-    public static Result<SocialNetwork> Create(string name, string path)
+    public static Result<SocialNetwork, Error> Create(string name, string path)
     {
         if (string.IsNullOrWhiteSpace(name))
-            return Result.Failure<SocialNetwork>("Name can not be empty");
+            return Errors.General.ValueIsInvalide("Name");
         
         if (string.IsNullOrWhiteSpace(path))
-            return Result.Failure<SocialNetwork>("Path can not be empty");
+            return Errors.General.ValueIsInvalide("Path");
 
         var socialNetwork = new SocialNetwork(name, path);
-        return Result.Success(socialNetwork);
+        return new SocialNetwork(name, path);
     }
 }
