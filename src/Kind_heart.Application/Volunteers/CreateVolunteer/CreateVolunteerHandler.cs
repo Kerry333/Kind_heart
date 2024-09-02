@@ -2,7 +2,6 @@ using CSharpFunctionalExtensions;
 using Kind_heart.Domain.Models.Volunteer;
 using Kind_heart.Domain.Shared;
 using Kind_heart.Domain.ValueObjects;
-using Kind_heart.Infrastructure.Repositories;
 
 namespace Kind_heart.Application.Volunteers.CreateVolunteer;
 

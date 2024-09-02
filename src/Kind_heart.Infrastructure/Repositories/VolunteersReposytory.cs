@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using CSharpFunctionalExtensions;
+using Kind_heart.Application.Volunteers;
 using Kind_heart.Domain.Models.Volunteer;
 using Kind_heart.Domain.Shared;
 using Microsoft.EntityFrameworkCore;

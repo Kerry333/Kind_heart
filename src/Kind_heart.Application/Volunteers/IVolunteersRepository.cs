@@ -1,10 +1,7 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using CSharpFunctionalExtensions;
 using Kind_heart.Domain.Models.Volunteer;
 
-namespace Kind_heart.Infrastructure.Repositories;
+namespace Kind_heart.Application.Volunteers;
 
 public interface IVolunteersRepository
 {
