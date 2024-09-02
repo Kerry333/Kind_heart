@@ -1,4 +1,5 @@
 using CSharpFunctionalExtensions;
+using Kind_heart.Domain.Shared;
 
 namespace Kind_heart.Domain.ValueObjects;
 
@@ -13,15 +14,15 @@ public record Requisite
         Description = description;
     }
 
-    public static Result<Requisite> Create(string name, string description)
+    public static Result<Requisite, Error> Create(string name, string description)
     {
         if (string.IsNullOrWhiteSpace(name))
-            return Result.Failure<Requisite>("Name can not be empty");
+            return Errors.General.ValueIsInvalide("Name");
         
         if (string.IsNullOrWhiteSpace(description))
-            return Result.Failure<Requisite>("Description can not be empty");
-
-        var requisite = new Requisite(name, description);
-        return Result.Success(requisite);
+            return Errors.General.ValueIsInvalide("Description");
+        
+        return new Requisite(name, description);
+       
     }
 }

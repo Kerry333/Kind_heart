@@ -12,10 +12,10 @@ public record BreedType
         Value = value;
     }
 
-    public static Result<BreedType> Create(string value)
+    public static Result<BreedType, Error> Create(string value)
     {
         if(string.IsNullOrWhiteSpace(value) || value.Length > Constants.MAX_LOW_TEXT_LENGTH)
-            return Result.Failure<BreedType>("SpeciesType is invalid");
+            return Errors.General.ValueIsInvalide("BreedType");
 
         return new BreedType(value);
     }

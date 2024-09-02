@@ -5,25 +5,25 @@ namespace Kind_heart.Domain.ValueObjects;
 
 public record FullName
 {
-    public Name FirstName { get; }  // так как record Name я создавала и для Pet, то почему бы его здесь не использовать
+    public string FirstName { get; }  
     public string? MiddleName { get; }
-    public Name LastName { get; } 
+    public string LastName { get; } 
 
-    private  FullName(Name firstName,
+    private  FullName(string firstName,
                         string? middleName,
-                        Name lastName)
+                        string lastName)
     {
         FirstName = firstName;
         MiddleName = middleName;
         LastName = lastName;
     }
 
-    public static Result<FullName> Create(Name firstName,
+    public static Result<FullName, Error> Create(string firstName,
                                             string? middleName,
-                                            Name lastName)
+                                           string lastName)
     {
         if(!string.IsNullOrEmpty(middleName) && middleName.Length > Constants.MAX_LOW_TEXT_LENGTH)
-            return Result.Failure<FullName>("Middlename is invalid");
+            return Errors.General.ValueIsInvalide("MiddleName");
 
         return new FullName(firstName, middleName, lastName);
     }

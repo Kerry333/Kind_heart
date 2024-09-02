@@ -24,26 +24,26 @@ public record Address
         ZipCode = zipCode;
     }
 
-    public static Result<Address> Create(string country, 
+    public static Result<Address, Error> Create(string country, 
                                             string city, 
                                             string streetName, 
                                             int number, 
                                             int zipCode)
     {
-        if(string.IsNullOrWhiteSpace(country) || country.Length > Constants.MAX_LOW_TEXT_LENGTH)
-            return Result.Failure<Address>("Country is invalid");
+        if (string.IsNullOrWhiteSpace(country) || country.Length > Constants.MAX_LOW_TEXT_LENGTH)
+            return Errors.General.ValueIsInvalide("Country");
         
         if(string.IsNullOrWhiteSpace(city) || city.Length > Constants.MAX_LOW_TEXT_LENGTH)
-            return Result.Failure<Address>("City is invalid");
+            return Errors.General.ValueIsInvalide("City");
         
         if(string.IsNullOrWhiteSpace(streetName) || streetName.Length > Constants.MAX_LOW_TEXT_LENGTH)
-            return Result.Failure<Address>("StreetName is invalid");
+            return Errors.General.ValueIsInvalide("StreetName");
         
         if (number <= 0 || number > Constants.MAX_HOUSE_NUMBER)
-            return Result.Failure<Address>("HouseNumber must be a positive number and within the allowed range.");
+            return Errors.General.ValueIsInvalide("HouseNumber");
         
         if (zipCode <= 0 )
-            return Result.Failure<Address>("HouseNumber must be a positive number.");
+            return Errors.General.ValueIsInvalide("HouseNumber");
         
         return new Address(country, city, streetName, number, zipCode);
     }

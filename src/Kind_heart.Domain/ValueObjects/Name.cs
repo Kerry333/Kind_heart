@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices.JavaScript;
 using CSharpFunctionalExtensions;
 using Kind_heart.Domain.Shared;
 
@@ -12,11 +13,11 @@ public record Name
         Value = value;
     }
 
-    public static Result<Name> Create(string value)
+    public static Result<Name, Error> Create(string value)
     {
-        if(string.IsNullOrWhiteSpace(value) || value.Length > Constants.MAX_LOW_TEXT_LENGTH)
-            return Result.Failure<Name>("Name can not be null and within the allowed range");
-
+        if (string.IsNullOrWhiteSpace(value) || value.Length > Constants.MAX_LOW_TEXT_LENGTH)
+            return Errors.General.ValueIsInvalide("Name");
+        
         return new Name(value);
     }
 }

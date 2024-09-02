@@ -12,10 +12,10 @@ public record SpeciesType
         Value = value;
     }
     
-    public static Result<SpeciesType> Create(string value)
+    public static Result<SpeciesType, Error> Create(string value)
     {
         if(string.IsNullOrWhiteSpace(value) || value.Length > Constants.MAX_LOW_TEXT_LENGTH)
-            return Result.Failure<SpeciesType>("SpeciesType is invalid");
+            return Errors.General.ValueIsInvalide("SpeciesType");
 
         return new SpeciesType(value);
     }

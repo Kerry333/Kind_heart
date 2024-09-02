@@ -12,10 +12,10 @@ public record Description
         Value = value;
     }
 
-    public static Result<Description> Create(string value)
+    public static Result<Description, Error> Create(string value)
     {
         if(string.IsNullOrWhiteSpace(value) || value.Length > Constants.MAX_HIGH_TEXT_LENGTH)
-            return Result.Failure<Description>("Description can not be null and within the allowed range");
+            return Errors.General.ValueIsInvalide("Description");
 
         return new Description(value);
     }

@@ -86,7 +86,7 @@ public class Pet : Shared.Entity<PetId>
     */
    
     // Но есть хорошая альтернатива (установить пакет CsharpFunctionalExtensions):
-    public static Result<Pet> Create(PetId id, 
+    public static Result<Pet, Error> Create(PetId id, 
                                     Name name, 
                                     Description description,
                                     PetType petType,
@@ -102,24 +102,25 @@ public class Pet : Shared.Entity<PetId>
                                     DateOnly createdDate,
                                     HelpStatus helpStatus)
     
+    
     {
         if(weight <= 0)
-            return Result.Failure<Pet>("Weight can not be less than zero");
+            return Errors.General.ValueIsInvalide("Weight");
         
         if(height <= 0)
-            return Result.Failure<Pet>("Height can not be less than zero");
+            return Errors.General.ValueIsInvalide("Height");
         
         if (birthday > DateOnly.FromDateTime(DateTime.Now))
-            return Result.Failure<Pet>("Birthday cannot be in the future.");
+            return Errors.General.ValueIsInvalide("Birthday");
         
         if (createdDate < birthday)
-            return Result.Failure<Pet>("Created date cannot be earlier than the birthday.");
+            return Errors.General.ValueIsInvalide("CreatedDate");
     
         if (createdDate > DateOnly.FromDateTime(DateTime.Now))
-            return Result.Failure<Pet>("Created date cannot be in the future.");
+            return Errors.General.ValueIsInvalide("CreatedDate");
         
         if (!Enum.IsDefined(typeof(HelpStatus), helpStatus))
-            return Result.Failure<Pet>("Invalid help status.");
+            return Errors.General.ValueIsInvalide("HelpStatus");
         
         
         var pet = new Pet(id,
@@ -137,8 +138,8 @@ public class Pet : Shared.Entity<PetId>
                         birthday, 
                         createdDate, 
                         helpStatus);
-        
-        return Result.Success(pet);
+
+        return pet;
     }
 
 }
